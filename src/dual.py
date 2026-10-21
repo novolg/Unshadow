@@ -59,9 +59,3 @@ def dual(frame_bgr, gamma=0.6, radius=0.02, clarity=0.0, sat=1.0, fuse_orig=True
         hsv[..., 1] = np.clip(hsv[..., 1] * sat, 0, 1)
         out = cv2.cvtColor(hsv, cv2.COLOR_HSV2BGR)
     return (np.clip(out, 0, 1) * 255 + 0.5).astype(np.uint8)
-
-
-def clahe(frame_bgr, clip=2.5, tiles=8):
-    lab = cv2.cvtColor(frame_bgr, cv2.COLOR_BGR2Lab)
-    lab[..., 0] = cv2.createCLAHE(clip, (tiles, tiles)).apply(lab[..., 0])
-    return cv2.cvtColor(lab, cv2.COLOR_Lab2BGR)
